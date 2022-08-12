@@ -16,12 +16,21 @@ idw = 1e-6*id;
 
 subplot(2,3,1)
 plot(vgs,id) 
+title('V_{gs} vs I_{D}')
+xlabel('V_{gs}(V)')
+ylabel('I_D{A}')
 
 subplot(2,3,2)
 plot(vgs,vov)
+title('V_{gs} vs V_{ov}')
+xlabel('V_{gs}(V)')
+ylabel('V_{ov}{V}')
 
 subplot(2,3,3)
 plot(vov,gmid)
+title('V_{gs} vs gm/id')
+xlabel('V_{ov}(V)')
+ylabel('g_m/i_d{V/$\Omega^2$}')
 
 subplot(2,3,4)
 plot(gmid,ft)
