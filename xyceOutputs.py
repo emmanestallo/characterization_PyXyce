@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt 
 from math import pi as pi 
-fileName = input()
+fileName = input("Enter CSV File: ")
 data_ = pd.read_csv(fileName) 
 
 cols = ["N(MN0:GM)","N(MN0:VTH)","N(MN0:CGD)","N(MN0:CGS)","N(MN0:GDS)","I(VD)","VG"]
@@ -22,7 +22,7 @@ gmro = np.divide(gm,gds)
 ft = np.divide(gm,2*pi*cgg)
 gmid = gm/id 
 ft_gmid = np.multiply(ft,gmid) 
-idw = 1e-6*id 
+idw = id/1e-6 
 
 
 fig,ax = plt.subplots(2,3)
