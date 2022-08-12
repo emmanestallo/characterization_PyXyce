@@ -1,0 +1,10 @@
+gm = xyceNet{:,"NMN0GM"};
+vth = xyceNet{:,"NMN0VTH"};
+cgd = xyceNet{:,"NMN0CGD"};
+cgs = xyceNet{:,"NMN0CGS"};
+gds = xyceNet{:,"NMN0GDS"};
+id = xyceNet{:,"IVD"};
+vgs = xyceNet{:,"VG"};
+
+cgg = cgs + cgd; 
+gmro = gm./gds
