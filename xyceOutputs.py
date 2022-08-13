@@ -38,46 +38,47 @@ def getParameters(data_):
     return vgs, id, vov, gmro, ft, gmid, ft_gmid, idw  
 
 
-def plot (fig,ax,lengthValue):
-    ax[0][0].plot(vgs,id,label=f'length={lengthValue}nm')
+def plot (fig,ax,lengthValue,initialLength=0):
+    ax[0][0].plot(vgs,id,label=f'length={initialLength+lengthValue}nm')
     ax[0][0].set_title('vgs vs id')
     ax[0][0].set_xlabel('vgs')
     ax[0][0].set_ylabel('id')
     ax[0][0].grid()
 
-    ax[0][1].plot(vgs,vov,label=f'length={lengthValue}nm')
+    ax[0][1].plot(vgs,vov,label=f'length={initialLength+lengthValue}nm')
     ax[0][1].set_title('vgs vs vov')
     ax[0][1].set_xlabel('vgs')
     ax[0][1].set_ylabel('vov')
     ax[0][1].grid()
 
-    ax[0][2].plot(vgs,gmid,label=f'length={lengthValue}nm')
+    ax[0][2].plot(vgs,gmid,label=f'length={initialLength+lengthValue}nm')
     ax[0][2].set_title('vgs vs gm/id')
     ax[0][2].set_xlabel('vgs')
     ax[0][2].set_ylabel('gm/id')
     ax[0][2].grid()
 
-    ax[1][0].plot(gmid,ft,label=f'length={lengthValue}nm')
+    ax[1][0].plot(gmid,ft,label=f'length={initialLength+lengthValue}nm')
     ax[1][0].set_title('gm/id vs ft')
     ax[1][0].set_xlabel('gm/id')
     ax[1][0].set_ylabel('ft')
     ax[1][0].grid()
 
-    ax[1][1].plot(gmid,gmro,label=f'length={lengthValue}nm')
+    ax[1][1].plot(gmid,gmro,label=f'length={initialLength+lengthValue}nm')
     ax[1][1].set_title('gm/id vs gm/gds')
     ax[1][1].set_xlabel('gm/id')
     ax[1][1].set_ylabel('gm/gds')
     ax[1][1].grid()
 
-    ax[1][2].plot(gmid,ft_gmid,label=f'length={lengthValue}nm')
-    ax[1][2].set_title('gm/id vs ft*gm/id')
+    ax[1][2].plot(gmid,idw,label=f'length={initialLength+lengthValue}nm')
+    ax[1][2].set_title('gm/id vs id/w')
     ax[1][2].set_xlabel('gm/id')
-    ax[1][2].set_ylabel('ft*gm/id')
+    ax[1][2].set_ylabel('id/w')
     ax[1][2].grid()
 
 data_ = pd.read_csv('xyceNet.sp.csv')
 nSweeps = int(input('Enter number of steps: '))
-length = int(input('Enter initial length: '))
+length = int(input('Enter step size: '))
+initialLength=int(input('Enter initial length: '))
 
 sweepInterval = int(len(data_)/nSweeps)
 
@@ -86,7 +87,7 @@ fig,ax = plt.subplots(2,3)
 for i in range(nSweeps): 
     toProcess = data_[sweepInterval*i:sweepInterval*(i+1)]
     vgs, id, vov, gmro, ft, gmid, ft_gmid, idw = getParameters(toProcess)
-    plot(fig,ax,(i+1)*length)
+    plot(fig,ax,(i+1)*length,initialLength)
 
 handles, labels = plt.gca().get_legend_handles_labels()
 by_label = dict(zip(labels, handles))
