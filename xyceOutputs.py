@@ -3,15 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 from math import pi as pi 
 
-def getThresholdIndex(vgs,vth,initial,final):
+def getThresholdIndex(vgs,vth):
     i = 0 
     while vgs[i] < vth[i]:
         i += 1 
     return i 
 
-def getParameters(fileName,initial,final):
-    data_ = pd.read_csv(fileName) 
-
+def getParameters(data_):
     cols = ["N(MN0:GM)","N(MN0:VTH)","N(MN0:CGD)","N(MN0:CGS)","N(MN0:GDS)","I(VD)","VG"]
 
     vth = data_[[cols[1]]].to_numpy()
@@ -78,8 +76,8 @@ def plot ():
     ax[1][2].set_ylabel('ft*gm/id')
     ax[1][2].grid()
 
-
-vgs, id, vov, gmro, ft, gmid, ft_gmid, idw = getParameters('xyceNet.sp.csv')
+data_ = pd.read_csv('xyceNet.sp.csv')
+vgs, id, vov, gmro, ft, gmid, ft_gmid, idw = getParameters(data_)
 
 plot()
 plt.tight_layout()
