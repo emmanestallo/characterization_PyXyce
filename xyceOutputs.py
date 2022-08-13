@@ -37,9 +37,8 @@ def getParameters(data_):
 
     return vgs, id, vov, gmro, ft, gmid, ft_gmid, idw  
 
-def plot ():
-    fig,ax = plt.subplots(2,3)
-    
+
+def plot (fig,ax,lengthValue):
     ax[0][0].plot(vgs,id)
     ax[0][0].set_title('vgs vs id')
     ax[0][0].set_xlabel('vgs')
@@ -76,11 +75,22 @@ def plot ():
     ax[1][2].set_ylabel('ft*gm/id')
     ax[1][2].grid()
 
-data_ = pd.read_csv('xyceNet.sp.csv')
-vgs, id, vov, gmro, ft, gmid, ft_gmid, idw = getParameters(data_)
 
-plot()
+data_ = pd.read_csv('xyceNet.sp.csv')
+nSweeps = int(input('Enter number of steps: '))
+
+sweepInterval = int(len(data_)/nSweeps)
+
+fig,ax = plt.subplots(2,3)
+
+for i in range(nSweeps): 
+    toProcess = data_[sweepInterval*i:sweepInterval*(i+1)]
+    vgs, id, vov, gmro, ft, gmid, ft_gmid, idw = getParameters(toProcess)
+    plot(fig,ax)
+    
+
 plt.tight_layout()
+plt.legend()
 plt.show()
 
 
