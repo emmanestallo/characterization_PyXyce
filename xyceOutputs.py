@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt 
 from math import pi as pi 
-from matplotlib.widgets import Cursor
 
 def getThresholdIndex(vgs,vth):
     i = 0 
@@ -90,27 +89,13 @@ fig,ax = plt.subplots(2,3)
 for i in range(nSweeps): 
     toProcess = data_[sweepInterval*i:sweepInterval*(i+1)]
     vgs, id, vov, gmro, ft, gmid, ft_gmid, idw = getParameters(toProcess)
-    plot(fig,ax,(i+1)*length,initialLength)
+    plot(fig,ax,(i)*length,initialLength)
 
 handles, labels = plt.gca().get_legend_handles_labels()
 by_label = dict(zip(labels, handles))
 fig.legend(by_label.values(), by_label.keys(), bbox_to_anchor=(0.01, 0.5), loc='center left')
 
 showGrid()
-
-cursor_00 = Cursor(ax[0][0], horizOn = True, vertOn=True, color='black', linewidth=1, 
-                useblit=True)
-cursor_01 = Cursor(ax[0][1], horizOn = True, vertOn=True, color='black', linewidth=1, 
-                useblit=True)                
-cursor_02 = Cursor(ax[0][2], horizOn = True, vertOn=True, color='black', linewidth=1, 
-                useblit=True)
-cursor_10 = Cursor(ax[1][0], horizOn = True, vertOn=True, color='black', linewidth=1, 
-                useblit=True)
-cursor_11 = Cursor(ax[1][1], horizOn = True, vertOn=True, color='black', linewidth=1, 
-                useblit=True)
-cursor_12 = Cursor(ax[1][2], horizOn = True, vertOn=True, color='black', linewidth=1, 
-                useblit=True)
-
 
 fig.tight_layout()
 plt.show()
