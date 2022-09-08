@@ -1,5 +1,5 @@
 # characterization_PyXyce
-Sandia Xyce and Python to characterize and plot cmos gm/id parameters
+Sandia Xyce and Python to characterize and plot CMOS $g_m/I_D$ parameters
   
 22nm PTM is found at https://ptm.asu.edu/  
 
